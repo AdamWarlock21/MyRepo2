@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
-@Service("StudPlannerServiceImpl")
+import org.springframework.stereotype.Repository;
+@Repository("StudPlannerServiceImpl")
 public class StudPlannerServiceImpl implements StudPlannerService {
 
     private StudPlannerServiceImpl service = null;

@@ -23,11 +23,12 @@ public class AccomodationController {
     @Qualifier("AccomodationServiceImpl")
     private AccomodationServiceImpl service;
 
-    @PostMapping("/create")
+    @PostMapping("/new")
     @ResponseBody
     public Accomodation create(Accomodation accom) {
         return service.create(accom);
     }
+    
      @GetMapping(path = "/find/{id}")
     public Accomodation findById(@PathVariable String id){
 
@@ -35,27 +36,23 @@ public class AccomodationController {
         return accom;
     }
 
-    @PostMapping("/update")
-    @ResponseBody
+    @PutMapping("/update")
     public Accomodation update(Accomodation accom) {
         return service.update(accom);
     }
 
-    @GetMapping("/delete/{id}")
-    @ResponseBody
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable String id) {
         service.delete(id);
 
     }
 
     @GetMapping("/read/{id}")
-    @ResponseBody
     public Accomodation read(@PathVariable String id) {
         return service.read(id);
     }
 
     @GetMapping("/read/all")
-    @ResponseBody
     public Set<Accomodation> getAll() {
         return service.getAll();
     }

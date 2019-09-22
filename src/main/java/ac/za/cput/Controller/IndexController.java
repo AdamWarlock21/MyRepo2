@@ -13,7 +13,7 @@ public class IndexController {
     @GetMapping("/")
     @ResponseBody
     public String getHome() {
-        return " Hello World ";
+        return " Welcome!!!! ";
     }
 
 }

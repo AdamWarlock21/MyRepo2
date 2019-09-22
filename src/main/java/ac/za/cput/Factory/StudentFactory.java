@@ -1,15 +1,11 @@
 package ac.za.cput.Factory;
 
 import ac.za.cput.Domain.Student;
-import ac.za.cput.Util.Misc;
 
 public class StudentFactory {
-
-    public static Student getStudent(String firstName, String lastName, int age) {
-        return new Student.Builder().age(age)
-                .studentFirstName(firstName)
-                .studentLastName(lastName)
-                .studentId(Misc.generateId())
-                .build();
+    public static Student getStudent(String userID, String firstName, String lastName, String email) {
+        return new Student.Builder().userID(userID).firstName(firstName).lastName(lastName).email(email).build();
     }
 }
+
+

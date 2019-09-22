@@ -31,27 +31,23 @@ public class FundedAccController {
         return service.create(fundA);
     }
 
-    @PostMapping("/update")
-    @ResponseBody
+    @PutMapping("/update")
     public FundedAcc update(FundedAcc fundA) {
         return service.update(fundA);
     }
 
-    @GetMapping("/delete/{id}")
-    @ResponseBody
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable String id) {
         service.delete(id);
 
     }
 
     @GetMapping("/read/{id}")
-    @ResponseBody
     public FundedAcc read(@PathVariable String id) {
         return service.read(id);
     }
 
     @GetMapping("/read/all")
-    @ResponseBody
     public Set<FundedAcc> getAll() {
         return service.getAll();
     }

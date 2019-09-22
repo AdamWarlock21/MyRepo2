@@ -10,14 +10,14 @@ import ac.za.cput.Repository.BookPlanRepository;
 import ac.za.cput.Repository.Impl.BookPlanRepositoryImpl;
 import ac.za.cput.Service.BookPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 /**
  *
  * @author BooBoo
  */
-@Service("BookPlanServiceImpl")
+@Repository("BookPlanServiceImpl")
 public class BookPlanServiceImpl implements BookPlanService{
     
     private BookPlanServiceImpl service = null;

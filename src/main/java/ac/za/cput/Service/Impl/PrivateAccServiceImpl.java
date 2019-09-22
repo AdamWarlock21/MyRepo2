@@ -13,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import org.springframework.stereotype.Repository;
 /**
  *
  * @author BooBoo
  */
-@Service("PrivateAccServiceImpl")
+@Repository("PrivateAccServiceImpl")
 public class PrivateAccServiceImpl implements PrivateAccService{
     private PrivateAccServiceImpl service = null;
     private PrivateAccRepository repository;

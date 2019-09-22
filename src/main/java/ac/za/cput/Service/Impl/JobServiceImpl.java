@@ -13,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import org.springframework.stereotype.Repository;
 /**
  *
  * @author BooBoo
  */
-@Service("JobServiceImpl")
+@Repository("JobServiceImpl")
 public class JobServiceImpl implements JobService{
     private JobServiceImpl service = null;
     private JobRepository repository;

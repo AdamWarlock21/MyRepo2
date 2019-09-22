@@ -1,16 +1,16 @@
 package ac.za.cput.Domain;
 
-public class Student {
+public class Administrator {
     private String userID, firstName, lastName, email;
 
-    public Student(Builder builder) {
+    public Administrator(Builder builder) {
         this.userID = builder.userID;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.email = builder.email;
     }
 
-    public Student(){
+    public Administrator(){
 
     }
 
@@ -68,22 +68,22 @@ public class Student {
             return this;
         }
 
-        public Student.Builder copy(Student student){
-            this.userID = student.userID;
-            this.firstName = student.firstName;
-            this.lastName = student.lastName;
-            this.email = student.email;
+        public Administrator.Builder copy(Administrator administrator){
+            this.userID = administrator.userID;
+            this.firstName = administrator.firstName;
+            this.lastName = administrator.lastName;
+            this.email = administrator.email;
             return this;
         }
 
-        public Student build(){
-            return new Student(this);
+        public Administrator build(){
+            return new Administrator(this);
         }
     }
 
     @Override
     public String toString() {
-        return "StudentFactory{" +
+        return "AdministratorFactory{" +
                 "userID='" + userID + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -94,16 +94,16 @@ public class Student {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Student)) return false;
+        if (!(o instanceof Administrator)) return false;
 
-        Student student = (Student) o;
+        Administrator administrator = (Administrator) o;
 
-        if (getUserID() != null ? !getUserID().equals(student.getUserID()) : student.getUserID() != null) return false;
-        if (getFirstName() != null ? !getFirstName().equals(student.getFirstName()) : student.getFirstName() != null)
+        if (getUserID() != null ? !getUserID().equals(administrator.getUserID()) : administrator.getUserID() != null) return false;
+        if (getFirstName() != null ? !getFirstName().equals(administrator.getFirstName()) : administrator.getFirstName() != null)
             return false;
-        if (getLastName() != null ? !getLastName().equals(student.getLastName()) : student.getLastName() != null)
+        if (getLastName() != null ? !getLastName().equals(administrator.getLastName()) : administrator.getLastName() != null)
             return false;
-        return getEmail() != null ? getEmail().equals(student.getEmail()) : student.getEmail() == null;
+        return getEmail() != null ? getEmail().equals(administrator.getEmail()) : administrator.getEmail() == null;
     }
 
     @Override

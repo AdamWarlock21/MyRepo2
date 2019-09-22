@@ -5,10 +5,10 @@ import ac.za.cput.Repository.AccomRepository;
 import ac.za.cput.Repository.Impl.AccomodationImpl;
 import ac.za.cput.Service.AccomodationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.util.Set;
-@Service("AccomodationServiceImpl")
+@Repository("AccomodationServiceImpl")
 public class AccomodationServiceImpl implements AccomodationService {
 
     private AccomodationServiceImpl service = null;

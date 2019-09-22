@@ -13,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import org.springframework.stereotype.Repository;
 /**
  *
  * @author BooBoo
  */
-@Service("FundedMealPlanServiceImpl")
+@Repository("FundedMealPlanServiceImpl")
 public class FundedMealPlanServiceImpl implements FundedMealPlanService{
     private FundedMealPlanServiceImpl service = null;
     private FundedMealPlanRepository repository;

@@ -10,7 +10,7 @@ import ac.za.cput.Repository.ExamPlanRepository;
 import ac.za.cput.Repository.Impl.ExamPlannerRepositoryImpl;
 import ac.za.cput.Service.ExamPlannerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * @author BooBoo
  */
-@Service("ExamPlannerServiceImpl")
+@Repository("ExamPlannerServiceImpl")
 public class ExamPlannerServiceImpl implements ExamPlannerService{
     
     private ExamPlannerServiceImpl service = null;

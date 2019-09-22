@@ -13,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import org.springframework.stereotype.Repository;
 /**
  *
  * @author BooBoo
  */
-@Service("TravelPlanServiceImpl")
+@Repository("TravelPlanServiceImpl")
 public class TravelPlanServiceImpl implements TravelPlanService{
     private TravelPlanServiceImpl service = null;
     private TravelPlanRepository repository;

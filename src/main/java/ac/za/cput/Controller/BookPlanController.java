@@ -24,33 +24,29 @@ public class BookPlanController {
     @Qualifier("BookPlanServiceImpl")
     private BookPlanServiceImpl service;
 
-    @PostMapping("/create")
+    @PostMapping("/new")
     @ResponseBody
     public BookPlan create(BookPlan book) {
         return service.create(book);
     }
 
-    @PostMapping("/update")
-    @ResponseBody
+    @PutMapping("/update")
     public BookPlan update(BookPlan book) {
         return service.update(book);
     }
 
-    @GetMapping("/delete/{id}")
-    @ResponseBody
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable String id) {
         service.delete(id);
 
     }
 
     @GetMapping("/read/{id}")
-    @ResponseBody
     public BookPlan read(@PathVariable String id) {
         return service.read(id);
     }
 
     @GetMapping("/read/all")
-    @ResponseBody
     public Set<BookPlan> getAll() {
         return service.getAll();
     }

@@ -30,27 +30,23 @@ public class FundedMealPlanController {
         return service.create(fundM);
     }
 
-    @PostMapping("/update")
-    @ResponseBody
+    @PutMapping("/update")
     public FundedMealPlan update(FundedMealPlan fundM) {
         return service.update(fundM);
     }
 
-    @GetMapping("/delete/{id}")
-    @ResponseBody
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable String id) {
         service.delete(id);
 
     }
 
     @GetMapping("/read/{id}")
-    @ResponseBody
     public FundedMealPlan read(@PathVariable String id) {
         return service.read(id);
     }
 
     @GetMapping("/read/all")
-    @ResponseBody
     public Set<FundedMealPlan> getAll() {
         return service.getAll();
     }

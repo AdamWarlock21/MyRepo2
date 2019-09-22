@@ -13,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import org.springframework.stereotype.Repository;
 /**
  *
  * @author BooBoo
  */
-@Service("StudBudgetServiceImpl")
+@Repository("StudBudgetServiceImpl")
 public class StudBudgetServiceImpl implements StudBudgetService{
     private StudBudgetServiceImpl service = null;
     private StudBudgetRepository repository;

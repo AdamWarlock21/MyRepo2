@@ -30,27 +30,23 @@ public class ExamPlannerController {
         return service.create(exam);
     }
 
-    @PostMapping("/update")
-    @ResponseBody
+    @PutMapping("/update")
     public ExamPlanner update(ExamPlanner exam) {
         return service.update(exam);
     }
 
-    @GetMapping("/delete/{id}")
-    @ResponseBody
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable String id) {
         service.delete(id);
 
     }
 
     @GetMapping("/read/{id}")
-    @ResponseBody
     public ExamPlanner read(@PathVariable String id) {
         return service.read(id);
     }
 
     @GetMapping("/read/all")
-    @ResponseBody
     public Set<ExamPlanner> getAll() {
         return service.getAll();
     }

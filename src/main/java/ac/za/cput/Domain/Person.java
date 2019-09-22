@@ -1,16 +1,16 @@
 package ac.za.cput.Domain;
 
-public class Student {
-    private String userID, firstName, lastName, email;
+public class Person {
+   private String userID, firstName, lastName, email;
 
-    public Student(Builder builder) {
+    public Person(Builder builder) {
         this.userID = builder.userID;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.email = builder.email;
     }
 
-    public Student(){
+    public Person(){
 
     }
 
@@ -68,22 +68,22 @@ public class Student {
             return this;
         }
 
-        public Student.Builder copy(Student student){
-            this.userID = student.userID;
-            this.firstName = student.firstName;
-            this.lastName = student.lastName;
-            this.email = student.email;
+        public Person.Builder copy(Person person){
+            this.userID = person.userID;
+            this.firstName = person.firstName;
+            this.lastName = person.lastName;
+            this.email = person.email;
             return this;
         }
 
-        public Student build(){
-            return new Student(this);
+        public Person build(){
+         return new Person(this);
         }
     }
 
     @Override
     public String toString() {
-        return "StudentFactory{" +
+        return "PersonController{" +
                 "userID='" + userID + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -94,16 +94,16 @@ public class Student {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Student)) return false;
+        if (!(o instanceof Person)) return false;
 
-        Student student = (Student) o;
+        Person person = (Person) o;
 
-        if (getUserID() != null ? !getUserID().equals(student.getUserID()) : student.getUserID() != null) return false;
-        if (getFirstName() != null ? !getFirstName().equals(student.getFirstName()) : student.getFirstName() != null)
+        if (getUserID() != null ? !getUserID().equals(person.getUserID()) : person.getUserID() != null) return false;
+        if (getFirstName() != null ? !getFirstName().equals(person.getFirstName()) : person.getFirstName() != null)
             return false;
-        if (getLastName() != null ? !getLastName().equals(student.getLastName()) : student.getLastName() != null)
+        if (getLastName() != null ? !getLastName().equals(person.getLastName()) : person.getLastName() != null)
             return false;
-        return getEmail() != null ? getEmail().equals(student.getEmail()) : student.getEmail() == null;
+        return getEmail() != null ? getEmail().equals(person.getEmail()) : person.getEmail() == null;
     }
 
     @Override
