@@ -1,128 +1,73 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ac.za.cput.Repository.Impl;
 
-import ac.za.cput.Domain.PrivateAcc;
-import ac.za.cput.Repository.PrivateAccRepository;
-import java.util.Set;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+
+
+
+import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import ac.za.cput.Domain.Student;
+import ac.za.cput.Factory.StudentFactory;
+import ac.za.cput.Repository.Impl.StudentRepositoryImpl;
 
-/**
- *
- * @author BooBoo
- */
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PrivateAccRepositoryImplIT {
-    
-    public PrivateAccRepositoryImplIT() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+
+    @Autowired
+    private StudentRepositoryImpl studentRepository;
+    Student student = StudentFactory.getStudent("TestID", "TestName", "TestLastName", "TestEmail");
+
+    @Test
+    public void a_create() {
+
+        studentRepository.create(student);
+        assertNotNull(studentRepository.getAll());
+        System.out.println(studentRepository.getAll());
+
     }
 
-    /**
-     * Test of getRepository method, of class PrivateAccRepositoryImpl.
-     */
     @Test
-    public void testGetRepository() {
-        System.out.println("getRepository");
-        PrivateAccRepository expResult = null;
-        PrivateAccRepository result = PrivateAccRepositoryImpl.getRepository();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void b_read() {
+
+        Student fromSet = studentRepository.read(student.getUserID());
+        assertEquals(student, fromSet);
+        System.out.println(studentRepository.getAll());
     }
 
-    /**
-     * Test of create method, of class PrivateAccRepositoryImpl.
-     */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-        PrivateAcc Acc = null;
-        PrivateAccRepositoryImpl instance = null;
-        PrivateAcc expResult = null;
-        PrivateAcc result = instance.create(Acc);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void c_update() {
+
+
+        Student updatedStudent  = StudentFactory.getStudent("TestID", "TestName2", "TestLastName", "TestEmail");
+        studentRepository.update(updatedStudent);
+        Assert.assertNotEquals(student.getFirstName(), updatedStudent.getFirstName());
+        System.out.println(studentRepository.getAll());
+
+
+
     }
 
-    /**
-     * Test of read method, of class PrivateAccRepositoryImpl.
-     */
     @Test
-    public void testRead() {
-        System.out.println("read");
-        String AccId = "";
-        PrivateAccRepositoryImpl instance = null;
-        PrivateAcc expResult = null;
-        PrivateAcc result = instance.read(AccId);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    public void d_delete() {
 
-    /**
-     * Test of update method, of class PrivateAccRepositoryImpl.
-     */
-    @Test
-    public void testUpdate() {
-        System.out.println("update");
-        PrivateAcc Acc = null;
-        PrivateAccRepositoryImpl instance = null;
-        PrivateAcc expResult = null;
-        PrivateAcc result = instance.update(Acc);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        assertNotNull(studentRepository.getAll());
+        studentRepository.delete(student.getUserID());
+        Student studentTor = studentRepository.read(student.getUserID());
+        assertNull(studentTor);
+        System.out.println(studentRepository.getAll());
 
-    /**
-     * Test of delete method, of class PrivateAccRepositoryImpl.
-     */
-    @Test
-    public void testDelete() {
-        System.out.println("delete");
-        String AccId = "";
-        PrivateAccRepositoryImpl instance = null;
-        instance.delete(AccId);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getAll method, of class PrivateAccRepositoryImpl.
-     */
-    @Test
-    public void testGetAll() {
-        System.out.println("getAll");
-        PrivateAccRepositoryImpl instance = null;
-        Set<PrivateAcc> expResult = null;
-        Set<PrivateAcc> result = instance.getAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }
