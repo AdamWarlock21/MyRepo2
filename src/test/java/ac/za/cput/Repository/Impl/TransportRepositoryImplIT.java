@@ -1,128 +1,74 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ac.za.cput.Repository.Impl;
 
-import ac.za.cput.Domain.Transport;
-import ac.za.cput.Repository.TransportRepository;
-import java.util.Set;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+
+
+
+import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import ac.za.cput.Domain.Administrator;
+import ac.za.cput.Domain.Administrator;
+import ac.za.cput.Factory.AdministratorFactory;
+import ac.za.cput.Repository.Impl.AdministratorRepositoryImpl;
 
-/**
- *
- * @author BooBoo
- */
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TransportRepositoryImplIT {
-    
-    public TransportRepositoryImplIT() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+
+    @Autowired
+    private AdministratorRepositoryImpl administratorRepository;
+    Administrator administrator = AdministratorFactory.getAdministrator("TestID", "TestName", "TestLastName", "TestEmail");
+
+    @Test
+    public void a_create() {
+
+        administratorRepository.create(administrator);
+        assertNotNull(administratorRepository.getAll());
+        System.out.println(administratorRepository.getAll());
+
     }
 
-    /**
-     * Test of getRepository method, of class TransportRepositoryImpl.
-     */
     @Test
-    public void testGetRepository() {
-        System.out.println("getRepository");
-        TransportRepository expResult = null;
-        TransportRepository result = TransportRepositoryImpl.getRepository();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void b_read() {
+
+        Administrator fromSet = administratorRepository.read(administrator.getUserID());
+        assertEquals(administrator, fromSet);
+        System.out.println(administratorRepository.getAll());
     }
 
-    /**
-     * Test of create method, of class TransportRepositoryImpl.
-     */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-        Transport Bplan = null;
-        TransportRepositoryImpl instance = null;
-        Transport expResult = null;
-        Transport result = instance.create(Bplan);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void c_update() {
+
+
+        Administrator updatedAdministrator  = AdministratorFactory.getAdministrator("TestID", "TestName2", "TestLastName", "TestEmail");
+        administratorRepository.update(updatedAdministrator);
+        Assert.assertNotEquals(administrator.getFirstName(), updatedAdministrator.getFirstName());
+        System.out.println(administratorRepository.getAll());
+
+
+
     }
 
-    /**
-     * Test of read method, of class TransportRepositoryImpl.
-     */
     @Test
-    public void testRead() {
-        System.out.println("read");
-        String transId = "";
-        TransportRepositoryImpl instance = null;
-        Transport expResult = null;
-        Transport result = instance.read(transId);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    public void d_delete() {
 
-    /**
-     * Test of update method, of class TransportRepositoryImpl.
-     */
-    @Test
-    public void testUpdate() {
-        System.out.println("update");
-        Transport Bplan = null;
-        TransportRepositoryImpl instance = null;
-        Transport expResult = null;
-        Transport result = instance.update(Bplan);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        assertNotNull(administratorRepository.getAll());
+        administratorRepository.delete(administrator.getUserID());
+        Administrator administratorTor = administratorRepository.read(administrator.getUserID());
+        assertNull(administratorTor);
+        System.out.println(administratorRepository.getAll());
 
-    /**
-     * Test of delete method, of class TransportRepositoryImpl.
-     */
-    @Test
-    public void testDelete() {
-        System.out.println("delete");
-        String transId = "";
-        TransportRepositoryImpl instance = null;
-        instance.delete(transId);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getAll method, of class TransportRepositoryImpl.
-     */
-    @Test
-    public void testGetAll() {
-        System.out.println("getAll");
-        TransportRepositoryImpl instance = null;
-        Set<Transport> expResult = null;
-        Set<Transport> result = instance.getAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

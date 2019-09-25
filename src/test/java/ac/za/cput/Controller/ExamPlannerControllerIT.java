@@ -1,114 +1,84 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ac.za.cput.Controller;
 
-import ac.za.cput.Domain.ExamPlanner;
-import java.util.Set;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.*;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.HttpClientErrorException;
+import ac.za.cput.Domain.ExamPlanner;
+import ac.za.cput.Factory.ExamPlanFactory;
 
-/**
- *
- * @author BooBoo
- */
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ExamPlannerControllerIT {
-    
-    public ExamPlannerControllerIT() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+    private String baseURL = "http://localhost:8080/administrator";
+
+    @Test
+    public void a_create() {
+
+        ExamPlanner administrator = ExamPlanFactory.getPlanner("ADP", "ADP356S", "13:00");
+        administrator.getExamName();
+        ResponseEntity<ExamPlanner> postResponse = restTemplate.postForEntity(baseURL + "/new", administrator, ExamPlanner.class);
+        assertNotNull(postResponse);
+        assertNotNull(postResponse.getBody());
+        System.out.println(postResponse.getBody());
+
     }
 
-    /**
-     * Test of create method, of class ExamPlannerController.
-     */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-        ExamPlanner exam = null;
-        ExamPlannerController instance = new ExamPlannerController();
-        ExamPlanner expResult = null;
-        ExamPlanner result = instance.create(exam);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void b_findById() {
+
+        ExamPlanner book = restTemplate.getForObject(baseURL + "/find/" + "ADP", ExamPlanner.class);
+        assertNotNull(book);
+        System.out.println(book.getExamName());
+
     }
 
-    /**
-     * Test of update method, of class ExamPlannerController.
-     */
     @Test
-    public void testUpdate() {
-        System.out.println("update");
-        ExamPlanner exam = null;
-        ExamPlannerController instance = new ExamPlannerController();
-        ExamPlanner expResult = null;
-        ExamPlanner result = instance.update(exam);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void c_update() {
+
+        ExamPlanner book = restTemplate.getForObject(baseURL + "/find/" + "ADP", ExamPlanner.class);
+        book.getExamName();
+        restTemplate.put(baseURL + "/update/" + "ITS", book);
+        ExamPlanner  newBook = restTemplate.getForObject(baseURL + "/update/" + "ITS", ExamPlanner.class);
+        assertNotNull(book);
+        System.out.println(book);
+
     }
 
-    /**
-     * Test of delete method, of class ExamPlannerController.
-     */
     @Test
-    public void testDelete() {
-        System.out.println("delete");
-        String id = "";
-        ExamPlannerController instance = new ExamPlannerController();
-        instance.delete(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void e_delete() {
+
+        ExamPlanner book = restTemplate.getForObject(baseURL + "/find/" + "ADP", ExamPlanner.class);
+        assertNotNull(book);
+        restTemplate.delete(baseURL + "/delete/" + "ADP");
+
+        
     }
 
-    /**
-     * Test of read method, of class ExamPlannerController.
-     */
     @Test
-    public void testRead() {
-        System.out.println("read");
-        String id = "";
-        ExamPlannerController instance = new ExamPlannerController();
-        ExamPlanner expResult = null;
-        ExamPlanner result = instance.read(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void d_getAll() {
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admin").exchange(baseURL + "/getall", HttpMethod.GET, entity, String.class);
+        assertNotNull(response.getBody());
+        System.out.println(response.getBody());
+
     }
 
-    /**
-     * Test of getAll method, of class ExamPlannerController.
-     */
-    @Test
-    public void testGetAll() {
-        System.out.println("getAll");
-        ExamPlannerController instance = new ExamPlannerController();
-        Set<ExamPlanner> expResult = null;
-        Set<ExamPlanner> result = instance.getAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
+
 }

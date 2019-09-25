@@ -1,128 +1,73 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ac.za.cput.Repository.Impl;
 
-import ac.za.cput.Domain.BookPlan;
-import ac.za.cput.Repository.BookPlanRepository;
-import java.util.Set;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+
+
+
+import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import ac.za.cput.Domain.Lecturer;
+import ac.za.cput.Factory.LecturerFactory;
+import ac.za.cput.Repository.Impl.LecturerRepositoryImpl;
 
-/**
- *
- * @author BooBoo
- */
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BookPlanRepositoryImplIT {
-    
-    public BookPlanRepositoryImplIT() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+
+    @Autowired
+    private LecturerRepositoryImpl lecturerRepository;
+    Lecturer lecturer = LecturerFactory.getLecturer("2131", "I", "Vardien", "213180545@my.com");
+
+    @Test
+    public void a_create() {
+
+        lecturerRepository.create(lecturer);
+        assertNotNull(lecturerRepository.getAll());
+        System.out.println(lecturerRepository.getAll());
+
     }
 
-    /**
-     * Test of getRepository method, of class BookPlanRepositoryImpl.
-     */
     @Test
-    public void testGetRepository() {
-        System.out.println("getRepository");
-        BookPlanRepository expResult = null;
-        BookPlanRepository result = BookPlanRepositoryImpl.getRepository();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void b_read() {
+
+        Lecturer fromSet = lecturerRepository.read(lecturer.getUserID());
+        assertEquals(lecturer, fromSet);
+        System.out.println(lecturerRepository.getAll());
     }
 
-    /**
-     * Test of create method, of class BookPlanRepositoryImpl.
-     */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-        BookPlan Bplan = null;
-        BookPlanRepositoryImpl instance = null;
-        BookPlan expResult = null;
-        BookPlan result = instance.create(Bplan);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void c_update() {
+
+
+        Lecturer updatedLecturer  = LecturerFactory.getLecturer("35614", "A", "Abrahams", "3561438@my.com");
+        lecturerRepository.update(updatedLecturer);
+        Assert.assertNotEquals(lecturer.getFirstName(), updatedLecturer.getFirstName());
+        System.out.println(lecturerRepository.getAll());
+
+
+
     }
 
-    /**
-     * Test of read method, of class BookPlanRepositoryImpl.
-     */
     @Test
-    public void testRead() {
-        System.out.println("read");
-        String bId = "";
-        BookPlanRepositoryImpl instance = null;
-        BookPlan expResult = null;
-        BookPlan result = instance.read(bId);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    public void d_delete() {
 
-    /**
-     * Test of update method, of class BookPlanRepositoryImpl.
-     */
-    @Test
-    public void testUpdate() {
-        System.out.println("update");
-        BookPlan Bplan = null;
-        BookPlanRepositoryImpl instance = null;
-        BookPlan expResult = null;
-        BookPlan result = instance.update(Bplan);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        assertNotNull(lecturerRepository.getAll());
+        lecturerRepository.delete(lecturer.getUserID());
+        Lecturer lecturerTor = lecturerRepository.read(lecturer.getUserID());
+        assertNull(lecturerTor);
+        System.out.println(lecturerRepository.getAll());
 
-    /**
-     * Test of delete method, of class BookPlanRepositoryImpl.
-     */
-    @Test
-    public void testDelete() {
-        System.out.println("delete");
-        String BookId = "";
-        BookPlanRepositoryImpl instance = null;
-        instance.delete(BookId);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getAll method, of class BookPlanRepositoryImpl.
-     */
-    @Test
-    public void testGetAll() {
-        System.out.println("getAll");
-        BookPlanRepositoryImpl instance = null;
-        Set<BookPlan> expResult = null;
-        Set<BookPlan> result = instance.getAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

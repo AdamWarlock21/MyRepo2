@@ -24,7 +24,7 @@ import static org.junit.Assert.assertNull;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class FundedAccRepositoryImplIT {
+public class PrivateAccRepositoryImplITest {
 
     @Autowired
     private PersonRepositoryImpl personRepository;

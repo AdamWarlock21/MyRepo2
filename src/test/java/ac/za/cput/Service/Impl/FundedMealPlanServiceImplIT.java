@@ -1,143 +1,88 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ac.za.cput.Service.Impl;
 
-import ac.za.cput.Domain.FundedMealPlan;
-import ac.za.cput.Service.FundedMealPlanService;
-import java.util.Set;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+
+
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import ac.za.cput.Domain.Person;
+import ac.za.cput.Factory.PersonFactory;
+import ac.za.cput.Service.Impl.PersonServiceImpl;
 
-/**
- *
- * @author BooBoo
- */
+import static junit.framework.TestCase.*;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FundedMealPlanServiceImplIT {
-    
-    public FundedMealPlanServiceImplIT() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+
+    @Autowired
+    private PersonServiceImpl personService;
+    Person person = PersonFactory.getPerson("TestID", "TestName", "TestLastName", "TestEmail");
+
+    @Test
+    public void a_create() {
+
+
+        personService.create(person);
+
+        assertNotNull(personService.getAll());
+        System.out.println(personService.getAll());
     }
 
-    /**
-     * Test of getService method, of class FundedMealPlanServiceImpl.
-     */
     @Test
-    public void testGetService() {
-        System.out.println("getService");
-        FundedMealPlanServiceImpl instance = null;
-        FundedMealPlanService expResult = null;
-        FundedMealPlanService result = instance.getService();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void b_read() {
+
+
+        assertNotNull(personService.getAll());
+
+        Person person1 = personService.read(person.getUserID());
+
+        assertEquals(person, person1);
+        System.out.println(personService.getAll());
+
+
     }
 
-    /**
-     * Test of create method, of class FundedMealPlanServiceImpl.
-     */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-        FundedMealPlan fund = null;
-        FundedMealPlanServiceImpl instance = null;
-        FundedMealPlan expResult = null;
-        FundedMealPlan result = instance.create(fund);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void c_update() {
+
+
+
+        assertNotNull(personService.getAll());
+
+        Person person1 = PersonFactory.getPerson("TestID", "TestName2", "TestLastName", "TestEmail");
+        person1.setUserID(person.getUserID());
+        personService.update(person1);
+
+        Person person2 = personService.read(person1.getUserID());
+
+        assertEquals(person1, person2);
+        System.out.println(personService.getAll());
+
     }
 
-    /**
-     * Test of update method, of class FundedMealPlanServiceImpl.
-     */
     @Test
-    public void testUpdate() {
-        System.out.println("update");
-        FundedMealPlan fund = null;
-        FundedMealPlanServiceImpl instance = null;
-        FundedMealPlan expResult = null;
-        FundedMealPlan result = instance.update(fund);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    public void d_delete() {
 
-    /**
-     * Test of delete method, of class FundedMealPlanServiceImpl.
-     */
-    @Test
-    public void testDelete() {
-        System.out.println("delete");
-        String s = "";
-        FundedMealPlanServiceImpl instance = null;
-        instance.delete(s);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of read method, of class FundedMealPlanServiceImpl.
-     */
-    @Test
-    public void testRead() {
-        System.out.println("read");
-        String s = "";
-        FundedMealPlanServiceImpl instance = null;
-        FundedMealPlan expResult = null;
-        FundedMealPlan result = instance.read(s);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of getAllFundedMealPlan method, of class FundedMealPlanServiceImpl.
-     */
-    @Test
-    public void testGetAllFundedMealPlan() {
-        System.out.println("getAllFundedMealPlan");
-        FundedMealPlanServiceImpl instance = null;
-        Set<FundedMealPlan> expResult = null;
-        Set<FundedMealPlan> result = instance.getAllFundedMealPlan();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        assertNotNull(personService.getAll());
 
-    /**
-     * Test of getAll method, of class FundedMealPlanServiceImpl.
-     */
-    @Test
-    public void testGetAll() {
-        System.out.println("getAll");
-        FundedMealPlanServiceImpl instance = null;
-        Set<FundedMealPlan> expResult = null;
-        Set<FundedMealPlan> result = instance.getAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        personService.delete(person.getUserID());
+
+        Person notInSet = personService.read(person.getUserID());
+
+        assertNull(notInSet);
+        System.out.println(personService.getAll());
+
+
+
+
+
     }
-    
 }
